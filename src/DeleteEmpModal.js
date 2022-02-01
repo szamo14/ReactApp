@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 
-export class DeleteDepModal extends Component {
+export class DeleteEmpModal extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,7 +13,7 @@ export class DeleteDepModal extends Component {
         event.preventDefault();
 
 
-        fetch(process.env.REACT_APP_API + 'Department' + '/' + event.target.DepartmentId.value, {
+        fetch(process.env.REACT_APP_API + 'Employee' + '/' + event.target.EmployeeId.value, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
@@ -21,7 +21,7 @@ export class DeleteDepModal extends Component {
 
             },
             body: JSON.stringify({
-                //DepartmentId: event.target.DepartmentId.value
+                //EmployeeId: event.target.DepartmentId.value
 
             })
         })
@@ -47,19 +47,19 @@ export class DeleteDepModal extends Component {
                 >
                     <Modal.Header clossebutton>
                         <Modal.Title id="contained-model-title-vcneter">
-                            Add Department
+                            Delete Employee
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
                             <Col sm={6}>
                                 <Form onSubmit={this.handleSubmit}>
-                                    <Form.Group controlId="DepartmentId">
-                                        <Form.Label>Department Id</Form.Label>
-                                        <Form.Control type="text" name="DepartmenId" required
+                                    <Form.Group controlId="EmployeeId">
+                                        <Form.Label>Employee Id</Form.Label>
+                                        <Form.Control type="text" name="EmployeeId" required
                                             disabled
-                                            defaultValue={this.props.depid}
-                                            placeholder="DepartmentId" />
+                                            defaultValue={this.props.empid}
+                                            placeholder="EmployeeId" />
                                     </Form.Group>
 
 

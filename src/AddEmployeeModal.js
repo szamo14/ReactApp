@@ -1,28 +1,27 @@
 import React, { Component } from 'react';
 import { Modal, Button, Row, Col, Form } from 'react-bootstrap';
 
-export class DeleteDepModal extends Component {
+export class AddEmployeeModal extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
-
-
     handleSubmit(event) {
         event.preventDefault();
-
-
-        fetch(process.env.REACT_APP_API + 'Department' + '/' + event.target.DepartmentId.value, {
-            method: 'DELETE',
+        fetch(process.env.REACT_APP_API + 'Employee', {
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
 
             },
             body: JSON.stringify({
-                //DepartmentId: event.target.DepartmentId.value
-
+                //EmployeeId: null,
+                EmployeeName: event.target.EmployeeName.value,
+                Department: event.target.Department.value,
+                DateOfJoining: event.target.DateOfJoining.value,
+                PhotoFileName: event.target.PhotoFileName.value
             })
         })
             .then(res => res.json()
@@ -36,7 +35,6 @@ export class DeleteDepModal extends Component {
     }
 
     render() {
-
         return (
             <div className="container">
                 <Modal
@@ -47,25 +45,36 @@ export class DeleteDepModal extends Component {
                 >
                     <Modal.Header clossebutton>
                         <Modal.Title id="contained-model-title-vcneter">
-                            Add Department
+                            Add Employee
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
                             <Col sm={6}>
                                 <Form onSubmit={this.handleSubmit}>
-                                    <Form.Group controlId="DepartmentId">
-                                        <Form.Label>Department Id</Form.Label>
-                                        <Form.Control type="text" name="DepartmenId" required
-                                            disabled
-                                            defaultValue={this.props.depid}
-                                            placeholder="DepartmentId" />
+                                    <Form.Group controlId="EmployeeName">
+                                        <Form.Label>Employee Name</Form.Label>
+                                        <Form.Control type="text" name="EmployeeName" required
+                                            placeholder="EmployeeName" />
                                     </Form.Group>
-
-
+                                    <Form.Group controlId="Department">
+                                        <Form.Label>Department Name</Form.Label>
+                                        <Form.Control type="text" name="Department" required
+                                            placeholder="Department" />
+                                    </Form.Group>
+                                    <Form.Group controlId="DateOfJoining">
+                                        <Form.Label>Date Of Joining</Form.Label>
+                                        <Form.Control type="text" name="DateOfJoining" //required
+                                            placeholder="DateOfJoining" />
+                                    </Form.Group>
+                                    <Form.Group controlId="PhotoFileName">
+                                        <Form.Label>PhotoFileName</Form.Label>
+                                        <Form.Control type="text" name="PhotoFileName" //required
+                                            placeholder="PhotoFileName" />
+                                    </Form.Group>
                                     <Form.Group>
                                         <Button varian="primaty" type="submit">
-                                            Delete
+                                            Add
                                         </Button>
                                     </Form.Group>
                                 </Form>
